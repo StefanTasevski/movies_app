@@ -10,12 +10,10 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
-import kotlin.collections.ArrayList
-
 
 class MoviesApi {
 
-    fun fetchMovieData(url: URL): List<Movie>? {
+    fun fetchMovieData(url: URL): ArrayList<Movie>? {
         var jsonResponse: String? = null
         try {
             jsonResponse = getResponseFromHttpUrl(url)
@@ -43,11 +41,11 @@ class MoviesApi {
         }
     }
 
-    private fun extractFeatureFromJson(newsJSON: String?): List<Movie>? {
+    private fun extractFeatureFromJson(newsJSON: String?): ArrayList<Movie>? {
         if (TextUtils.isEmpty(newsJSON)) {
             return null
         }
-        val movieList: MutableList<Movie> = ArrayList()
+        val movieList: ArrayList<Movie> = ArrayList()
         try {
             val baseJsonResponse = JSONObject(newsJSON ?: "")
             val newsArray = baseJsonResponse.getJSONArray("results")
@@ -55,6 +53,7 @@ class MoviesApi {
             for (i in 0 until newsArray.length()) {
                 val currentMovieItem = newsArray.getJSONObject(i)
                 val id = currentMovieItem.getInt("id")
+
                 val title = currentMovieItem.getString("title")
                 val plotSynopsis = currentMovieItem.getString("overview")
                 val posterPath = currentMovieItem.getString("poster_path")
