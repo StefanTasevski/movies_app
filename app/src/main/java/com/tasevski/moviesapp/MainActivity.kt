@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 progressBar.isVisible = result.isNullOrEmpty()
                 textViewError.isVisible = viewModel.error != null
                 textViewError.text = viewModel.error
+                viewModel.error = null
             }
         }
     }

@@ -1,17 +1,22 @@
 package com.tasevski.moviesapp.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.tasevski.moviesapp.DetailsActivity
 import com.tasevski.moviesapp.databinding.ListItemBinding
 import com.tasevski.moviesapp.model.Movie
 
 class MoviesAdapter : ListAdapter<Movie, MoviesViewHolder>(MoviesComparator()) {
+    private var parentObject: ViewGroup? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
+        parentObject = parent
         val binding =
             ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviesViewHolder(binding)
@@ -21,6 +26,15 @@ class MoviesAdapter : ListAdapter<Movie, MoviesViewHolder>(MoviesComparator()) {
         val currentItem = getItem(position)
         if (currentItem != null) {
             holder.bind(currentItem)
+        }
+        holder.itemView.setOnClickListener {
+            if(parentObject!=null) {
+                val intent = Intent(parentObject?.context, DetailsActivity::class.java)
+                intent.putExtra("title", currentItem.title)
+                intent.putExtra("plotSynopsis", currentItem.plotSynopsis)
+                intent.putExtra("posterPath", currentItem.posterPath)
+                startActivity(parentObject!!.context, intent, null)
+            }
         }
     }
 }
