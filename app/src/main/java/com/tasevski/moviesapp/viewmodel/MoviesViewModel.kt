@@ -7,7 +7,7 @@ import com.tasevski.moviesapp.model.Movie
 import java.net.URL
 
 class MoviesViewModel : ViewModel() {
-    val movies: MutableLiveData<List<Movie>> = MutableLiveData()
+    val movies: MutableLiveData<List<Movie>?> = MutableLiveData()
 
     val API_KEY = "c338cee6389edcf1bd4f342b751ceafd"
     val START_URL = "https://api.themoviedb.org/3/discover/movie"
@@ -18,6 +18,8 @@ class MoviesViewModel : ViewModel() {
 
     fun getMovies() {
         val moviesApi = MoviesApi()
-        movies.postValue(moviesApi.fetchMovieData(buildURL()))
+        Thread {
+            movies.postValue(moviesApi.fetchMovieData(buildURL()))
+        }.start()
     }
 }
