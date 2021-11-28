@@ -8,6 +8,7 @@ import java.net.URL
 
 class MoviesViewModel : ViewModel() {
     val movies: MutableLiveData<ArrayList<Movie>?> = MutableLiveData()
+    var error: String? = null
 
     val API_KEY = "c338cee6389edcf1bd4f342b751ceafd"
     val START_URL = "https://api.themoviedb.org/3/discover/movie"
@@ -22,6 +23,7 @@ class MoviesViewModel : ViewModel() {
     fun getMovies() {
         val moviesApi = MoviesApi()
         Thread {
+            error = moviesApi.error
             if(movies.value?.isNotEmpty() == true) {
                 val list = movies.value
                 list?.addAll(moviesApi.fetchMovieData(buildURL())?.toMutableList() ?: arrayListOf())

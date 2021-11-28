@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
                 moviesAdapter.submitList(result)
 
                 progressBar.isVisible = result.isNullOrEmpty()
-                textViewError.isVisible = result.isNullOrEmpty()
+                textViewError.isVisible = viewModel.error != null
+                textViewError.text = viewModel.error
             }
         }
     }

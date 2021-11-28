@@ -1,7 +1,6 @@
 package com.tasevski.moviesapp.api
 
 import android.text.TextUtils
-import android.util.Log
 import com.tasevski.moviesapp.model.Movie
 import org.json.JSONException
 import org.json.JSONObject
@@ -13,12 +12,14 @@ import java.util.*
 
 class MoviesApi {
 
+    var error: String? = null
+
     fun fetchMovieData(url: URL): ArrayList<Movie>? {
         var jsonResponse: String? = null
         try {
             jsonResponse = getResponseFromHttpUrl(url)
         } catch (e: IOException) {
-            Log.e("Error", "Problem making the HTTP request.", e)
+            error = "Problem making the HTTP request."
         }
         return extractFeatureFromJson(jsonResponse)
     }
@@ -63,7 +64,7 @@ class MoviesApi {
                 movieList.add(movieItem)
             }
         } catch (e: JSONException) {
-            Log.e("Error", "Problem parsing the news JSON results", e)
+            error ="Problem parsing the news JSON results"
         }
         return movieList
     }
