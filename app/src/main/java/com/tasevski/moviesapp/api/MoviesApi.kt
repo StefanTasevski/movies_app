@@ -51,6 +51,7 @@ class MoviesApi {
         try {
             val baseJsonResponse = JSONObject(newsJSON ?: "")
             val newsArray = baseJsonResponse.getJSONArray("results")
+
             for (i in 0 until newsArray.length()) {
                 val currentMovieItem = newsArray.getJSONObject(i)
                 val id = currentMovieItem.getInt("id")
