@@ -40,11 +40,12 @@ class MoviesAdapter : ListAdapter<Movie, MoviesViewHolder>(MoviesComparator()) {
 }
 
 class MoviesViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val imageUrl = "http://image.tmdb.org/t/p/w500"
 
     fun bind(movie: Movie) {
         binding.apply {
             Glide.with(itemView)
-                .load("http://image.tmdb.org/t/p/w500"+movie.posterPath)
+                .load(imageUrl+movie.posterPath)
                 .into(imageViewLogo)
             title.text = movie.title
             overview.text = movie.plotSynopsis

@@ -7,15 +7,16 @@
 
     <ImageView
         android:id="@+id/image_view_logo"
-        android:layout_width="75dp"
+        android:layout_width="@dimen/image_tile_width"
         android:layout_height="wrap_content"
-        tools:src="@mipmap/ic_launcher" />
+        tools:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/poster" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/start_margin"
         android:layout_toEndOf="@id/image_view_logo"
         android:textColor="@color/black"
         tools:text="Title" />
@@ -25,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/start_margin"
         android:layout_toEndOf="@id/image_view_logo"
         tools:text="Overview" />
 

@@ -7,8 +7,8 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
-    viewBinding {
-        enabled = true
+    buildFeatures{
+        viewBinding true
     }
 
     defaultConfig {
@@ -26,6 +26,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        it.buildConfigField('String', 'API_KEY', '\"c338cee6389edcf1bd4f342b751ceafd\"')
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

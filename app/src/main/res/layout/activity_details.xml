@@ -8,15 +8,15 @@
     <ImageView
         android:id="@+id/image_view_logo"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        tools:src="@mipmap/ic_launcher" />
+        android:layout_height="@dimen/image_view_details"
+        tools:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/poster" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="20sp"
+        android:textSize="@dimen/title_text_size"
         android:gravity="center"
         android:layout_below="@id/image_view_logo"
         android:textColor="@color/black"
@@ -27,7 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_marginStart="8dp"
         tools:text="Overview" />
 
 </RelativeLayout>

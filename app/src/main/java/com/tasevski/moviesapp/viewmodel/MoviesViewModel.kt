@@ -2,6 +2,7 @@ package com.tasevski.moviesapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tasevski.moviesapp.BuildConfig
 import com.tasevski.moviesapp.api.MoviesApi
 import com.tasevski.moviesapp.model.Movie
 import java.net.URL
@@ -10,14 +11,13 @@ class MoviesViewModel : ViewModel() {
     val movies: MutableLiveData<ArrayList<Movie>?> = MutableLiveData()
     var error: String? = null
 
-    val API_KEY = "c338cee6389edcf1bd4f342b751ceafd"
-    val START_URL = "https://api.themoviedb.org/3/discover/movie"
+    private val apiKey = BuildConfig.API_KEY
+    private val url = "https://api.themoviedb.org/3/discover/movie"
+    private var pageNumber = 0
 
-    var pageNumber = 0
-
-    fun buildURL(): URL {
+    private fun buildURL(): URL {
         pageNumber++
-        return URL(START_URL+"?api_key="+API_KEY+"&page="+pageNumber)
+        return URL("$url?api_key=$apiKey&page=$pageNumber")
     }
 
     fun getMovies() {
